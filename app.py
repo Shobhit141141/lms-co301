@@ -10,6 +10,7 @@ app.secret_key = os.getenv('SECRET_KEY')
 app.config['MYSQL_HOST'] = os.getenv('MYSQL_HOST')
 app.config['MYSQL_USER'] = os.getenv('MYSQL_USER')
 app.config['MYSQL_PASSWORD'] = os.getenv('MYSQL_PASSWORD')
+app.config['MYSQL_DB'] = 'library_db' 
 
 
 mysql = MySQL(app)
@@ -32,6 +33,7 @@ def setup_database():
             available BOOLEAN DEFAULT TRUE
         )
         """)
+        conn.commit()  
 
         cursor.close()
         print(f"Database library_db and table 'books' checked/created successfully.")
