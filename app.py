@@ -55,7 +55,7 @@ def add_book():
         title = request.form['title']
         author = request.form['author']
         genre = request.form['genre']
-        available = request.form.get('available') == 'on'
+        available = 'available' in request.form 
         cur = mysql.connection.cursor()
         cur.execute("INSERT INTO books (title, author, genre, available) VALUES (%s, %s, %s, %s)", 
                     (title, author, genre, available))
@@ -64,6 +64,7 @@ def add_book():
         flash("Book added successfully!")
         return redirect(url_for('index'))
     return render_template('add.html')
+
 
 @app.route('/delete/<int:id>')
 def delete_book(id):
